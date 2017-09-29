@@ -411,7 +411,7 @@ module.exports = router => {
          }));
         }else {
             res.status(401).json({
-                "status": false,
+                "status": 401,
                 message: 'cant fetch data !'
             });
         }
@@ -659,7 +659,39 @@ module.exports = router => {
         })
 
     })
+router.get("/mock/readStatus",(req,res)=>{
+    res.send({
+        "statuscount": [
+              {
+            "statusname": "DOraised",
+            "statuscount": 2
+            },
+              {
+            "statusname": "MaterialRequested",
+            "statuscount": 1
+            },
+              {
+            "statusname": "POraised",
+            "statuscount": 1
+            },
+              {
+            "statusname": "QuotationRejected",
+            "statuscount": 1
+            }
+            ],
+            
+    })
 
+
+})
+
+
+router.get("/mock/readCycle", (req,res)=>{
+    res.send({
+            "openStatus": 4,
+            "closedStatus": 1        
+    })
+})
     // readRequest service gives dummy data for the request
     router.get("/mock/Readrequest", (req, res) => {
 
