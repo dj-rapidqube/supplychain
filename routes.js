@@ -340,7 +340,7 @@ module.exports = router => {
             for (let i = 0; i < result.query.length; i++) {
         
             if (result.query[i].status == "claimRaised" || result.query[i].status == "claimRequested" ||
-                 result.query[i].status == "NotDelivered" || result.query[i].status == "DoDelivered"||
+             result.query[i].status == "NotDelivered" || result.query[i].status == "DoDelivered"||
              result.query[i].status == "DOraised"|| result.query[i].status == "MaterialRequested"|| 
              result.query[i].status == "PaymentInitiated"|| result.query[i].status == "QuotationRejected"|| 
              result.query[i].status == "POraised"|| result.query[i].status == "PaymentReceived"|| 
