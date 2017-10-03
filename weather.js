@@ -1,5 +1,10 @@
-// app.js
-
+/**
+@author: dhananjay patil
+@version: 1.0
+@date: 03/10/2017
+@Description: Weather Data API  
+**/
+// This file will Interact with IBM weather Data and it will return forecast.
 var express = require('express');
 var request = require('request');
 var cfenv = require('cfenv');
