@@ -16,18 +16,6 @@ var helmet = require('helmet');
 var app = express();
 var ninetyDaysInMilliseconds = 7776000000;
 
-app.configure(function(){
-  app.use(express.static(__dirname + '/public'));
-  // set the HTTP Strict Transport Security (HSTS) header for 90 days	
-  app.use(helmet.hsts({
-	  maxAge: ninetyDaysInMilliseconds,
-	  includeSubdomains: true,
-	  force: true
-  }));
-  // Prevent Cross-site scripting (XSS) attacks
-  app.use(helmet.xssFilter());  
-});
-
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();
 var weather_host = appEnv.services["weatherinsights"] 
