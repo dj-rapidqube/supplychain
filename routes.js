@@ -367,10 +367,8 @@ module.exports = router => {
                     OpenList.push(result.query[i].status);
                 } else if (result.query[i].status == "InvoiceRaised") {
                     OpenList.push(result.query[i].status);
-                    
                 }else if (result.query[i].status == "InvoiceApproved") {
                     OpenList.push(result.query[i].status);
-                    
                 }else if (result.query[i].status == "QuotationRaised") {
                     OpenList.push(result.query[i].status);
                 }else if(result.query[i].status == "QuotationRejected") {
@@ -574,10 +572,11 @@ function weatherAPI(path, qs, done) {
         }
     });
 }
-
 router.get('/api/forecast/daily', function(req, res) {
+    var weatherData =[];
+    
     var geocode = (req.query.geocode || "19.075984,72.877656").split(",");
-    weatherAPI("/api/weather/v1/geocode/" + geocode[0] + "/" + geocode[1] + "/forecast/daily/10day.json", {
+    weatherAPI("/api/weather/v1/geocode/" + geocode[0] + "/" + geocode[1] + "/forecast/daily/7day.json", {
         units: req.query.units || "e",
         language: req.query.language || "en-US"
     }, function(err, result) {
@@ -585,13 +584,23 @@ router.get('/api/forecast/daily', function(req, res) {
         	console.log(err);
             res.send(err).status(400);
         } else {
-        	console.log("10 days Forecast");
-            res.json(result);
+            console.log("10 days Forecast");
+            for(let i =0;i<result.forecasts.length;i++){
+                weatherData.push({
+                "max_temp":result.forecasts[i].max_temp,
+                "min_temp":result.forecasts[i].min_temp,
+                "narrative":result.forecasts[i].narrative,
+                "Day":result.forecasts[i].dow
+                })
+        }
+            res.json(weatherData);
         }
     });
 });
 
 router.get('/api/forecast/daily/3days', function(req, res) {
+    var weatherData =[];
+    
     var geocode = (req.query.geocode || "19.075984,72.877656").split(",");
     weatherAPI("/api/weather/v1/geocode/" + geocode[0] + "/" + geocode[1] + "/forecast/daily/3day.json", {
         units: req.query.units || "e",
@@ -601,8 +610,16 @@ router.get('/api/forecast/daily/3days', function(req, res) {
         	console.log(err);
             res.send(err).status(400);
         } else {
-        	console.log("3 days Forecast");
-            res.json(result);
+            console.log("3 days Forecast");
+            for(let i =0;i<result.forecasts.length;i++){
+                weatherData.push({
+                "max_temp":result.forecasts[i].max_temp,
+                "min_temp":result.forecasts[i].min_temp,
+                "narrative":result.forecasts[i].narrative,
+                "Day":result.forecasts[i].dow
+                })
+        }
+            res.json(weatherData);
         }
     });
 });
@@ -622,10 +639,6 @@ router.get('/api/forecast/hourly', function(req, res) {
         }
     });
 });
-
-
-
-
 
 
    //---------------------Mock Services For UI testing--------------------------
