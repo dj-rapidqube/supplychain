@@ -20,7 +20,7 @@ var ninetyDaysInMilliseconds = 7776000000;
 var appEnv = cfenv.getAppEnv();
 var weather_host = appEnv.services["weatherinsights"] 
         ? appEnv.services["weatherinsights"][0].credentials.url // Weather credentials passed in
-        : "https://c0c9c05e-ed89-429c-88e2-daffb83ce568:hqlvdlSrDM@twcservice.au-syd.mybluemix.net"; // or copy your credentials url here for standalone
+        : "https://5812af4a-b400-446f-a639-c665700dcbed:hQ6sKnTyIr@twcservice.mybluemix.net"; // or copy your credentials url here for standalone
 
 function weatherAPI(path, qs, done) {
     var url = weather_host + path;
