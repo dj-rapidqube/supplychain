@@ -30,6 +30,33 @@ module.exports = router => {
     // weather API key
     var apiKey = '6ebeec1ed5f648e88de55743172109'; 
 
+    // Iot Data Thingworks 
+    router.get('/location', cors(), (req, res1) => {
+        console.log("entering into IOT function ");
+
+        var options = {
+            url: 'https://academic.cloud.thingworx.com/Thingworx/Things/GpsTracker_kheteshrotangan/Properties?appKey=d50144fb-8674-44ea-83d4-aca709204753',
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+                'Accept': 'application/json'
+            },
+          
+        };
+            request(options, function(err, result, body) {
+                if (result && (result.statusCode === 200 || result.statusCode === 201 || result.statusCode === 401 || result.statusCode === 402 || result.statusCode === 404)) {
+                   var mydata = JSON.parse(result.body)
+                   
+                   res1.status(result.statusCode).json({
+                        
+                       data : mydata.rows,
+   
+                    })
+                }
+
+            });
+        
+    });
     // registerUser - routes user input to Regestration API.
     router.post('/registerUser', cors(), (req, res1) => {
         console.log("entering register function ");
